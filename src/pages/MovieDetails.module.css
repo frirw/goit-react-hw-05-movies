@@ -1,0 +1,19 @@
+.infoWrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.infoWrapper img {
+  max-width: 250px;
+  max-height: 350px;
+}
+
+.infoWrapper p {
+  max-width: 56vw;
+}
+
+.genresList {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}

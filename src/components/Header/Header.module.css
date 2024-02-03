@@ -1,0 +1,24 @@
+.headerContainer {
+  background-image: linear-gradient(to right, #ff69b4, #ff1493);
+  padding: 10px;
+}
+
+.nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.nav li {
+  margin-right: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+.link:hover {
+  color: #f7b5b5;
+}
