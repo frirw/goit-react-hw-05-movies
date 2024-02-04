@@ -8,6 +8,7 @@ const DEFAULT_IMAGE =
 const Cast = () => {
   const { movieId } = useParams();
   const [filmCast, setFilmCast] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCast = async () => {
@@ -16,6 +17,8 @@ const Cast = () => {
         setFilmCast(castData.cast);
       } catch (error) {
         console.error('Failed to fetch cast:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -23,32 +26,30 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <>
-      {filmCast && filmCast.length === 0 ? (
-        <div>We don't have any cast for this movie.</div>
-      ) : (
-        <div>
-          <ul>
-            {filmCast.map(actor => (
-              <li key={actor.id}>
-                <img
-                  src={
-                    actor.profile_path
-                      ? `https://image.tmdb.org/t/p/original${actor.profile_path}`
-                      : DEFAULT_IMAGE
-                  }
-                  alt={actor.name}
-                  width="100"
-                  height="100"
-                />
-                <h4>{actor.original_name}</h4>
-                <p>Character: {actor.character}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div>
+      {isLoading && <div>Loading...</div>}
+      {!isLoading && !filmCast && <div>We don't have any cast for this movie.</div>}
+      {!isLoading && filmCast && (
+        <ul>
+          {filmCast.map(actor => (
+            <li key={actor.id}>
+              <img
+                src={
+                  actor.profile_path
+                    ? `https://image.tmdb.org/t/p/original${actor.profile_path}`
+                    : DEFAULT_IMAGE
+                }
+                alt={actor.name}
+                width="100"
+                height="100"
+              />
+              <h4>{actor.original_name}</h4>
+              <p>Character: {actor.character}</p>
+            </li>
+          ))}
+        </ul>
       )}
-    </>
+    </div>
   );
 };
 
